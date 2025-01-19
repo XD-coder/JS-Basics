@@ -12,7 +12,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #181818;
         }
 
         .title h1 {
@@ -43,12 +43,13 @@
         .BtnReset {
             padding: 10px 20px;
             font-size: 1em;
-            margin-top: 20px;
+            margin-top: 10px; /* Reduced margin */
             border: none;
             border-radius: 5px;
             background-color: #f44336; /* Red */
             color: white;
             cursor: pointer;
+            width: 168px; /* Match game button width */
         }
 
         .BtnReset:hover {
@@ -59,50 +60,113 @@
             margin-top: 20px;
             font-size: 1.2em;
             text-align: center;
-            white-space: pre-line; /* To preserve line breaks */
+            white-space: pre-line;
+            color: white;
         }
+
+        .game-area { 
+            display: flex;
+            align-items: center; 
+            background-color: #545454;
+            border-radius: 20px;
+            line-height: 1.0; 
+        }
+
+        .scoreboard {
+            display: flex;
+            flex-direction: column; 
+            margin-right: 100px; 
+            background-color: #333;
+            border-radius: 10px;
+            padding: 23px; /* Add padding */
+            color: white;
+        }
+
+        .top-bar {
+            background-color: #17913f; 
+            padding: 15px 0;           
+            width: 100%;              
+            text-align: center;        
+            position: fixed;          
+            top: 0;                   
+            left: 0;                  
+            z-index: 10;              
+        }
+
+        .top-bar h1 {
+            color: white;            
+            margin: 0;                
+        }
+
+        .game-buttons {
+            display: flex;
+            flex-direction: row; 
+            align-items: center; 
+        }
+        .button-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #333;
+            padding: 70px;
+            border-radius: 20px;
+        }
+        
     </style>
 </head>
 <body>
-    <div class="title"><h1>Rock Paper Scissors Game !!!</h1></div>
-    <div class="guide">Press a button to choose a hand</div>
-    <div>
-        <button class="gameBtn" onclick="whoWon('Rock');">Rock</button>
-        <button class="gameBtn" onclick="whoWon('Paper');">Paper</button>
-        <button class="gameBtn" onclick="whoWon('Scissors');">Scissors</button>
+    <div class="top-bar"><h1>Rock Paper Scissors Game !!!</h1></div>
+    
+    <div class="game-area">
+        <div class="scoreboard">
+            <p1>User wins: <p class="userWins">0</p></p1>
+            <p1>Comp wins: <p class="compWins">0</p></p1>
+            <p1>Ties: <p class="tiesCount">0</p></p1>
+        </div>
+        <div class="button-area">
+            <div class="game-buttons">
+                <button class="gameBtn" onclick="whoWon('Rock');">Rock</button>
+                <button class="gameBtn" onclick="whoWon('Paper');">Paper</button>
+                <button class="gameBtn" onclick="whoWon('Scissors');">Scissors</button></div>
+            <div>
+                <button class="BtnReset" onclick="location.reload()">Reset</button> 
+            </div>
+            
+        
+        </div>
     </div>
-    <div>
-        <button class="BtnReset" onclick="location.reload()">Reset</button></div>
-        <p class="resultMsg"></p> 
-    <div>
-        <p1>User wins: <p class="userWins"></p></p1>
-        <p1>Comp wins: <p class="compWins"></p></p1>
-    </div>
+
+    <p class="resultMsg"></p> 
+
     <script>
-        const result = document.querySelector('.resultMsg'); // Use querySelector
+        const result = document.querySelector('.resultMsg'); 
         const userWinLog = document.querySelector('.userWins');
-        const compWinLog = document.querySelector('.userWins');
+        const compWinLog = document.querySelector('.compWins');
+        const tiecountlog = document.querySelector('.tiesCount');
         let userWins= 0;
         let compWins= 0;
+        let ties = 0;
+
         function genCompInput(){
             console.log("computer input generated");
-            const input = Math.floor(Math.random() * 3); // Use Math.floor for integers 0, 1, 2
+            const input = Math.floor(Math.random() * 3); 
             if (input === 0){ 
                 return "Rock";
             } else if (input === 1){
                 return "Paper";
-            } else { // Simplified condition
-                return "Scissors"; // Corrected spelling 
+            } else { 
+                return "Scissors"; 
             }
         }
 
         function whoWon(userIn) {
             console.log("whoWon function initiated");
             let compIn = genCompInput();
-            let message = "Computer chose " + compIn + " \n"; // Create the message
-
+            let message = "Computer chose " + compIn + " \n"; 
+            
             if (compIn === userIn){
-                message += "It's a tie!"; 
+                message += "It's a tie!";
+                ties+=1; 
             } else if (compIn =="Rock" && userIn =="Paper"){
                 message += "User Wins";
                 userWins +=1;
@@ -123,9 +187,10 @@
                 compWins +=1;
             }
 
-            result.textContent = message; // Update the text content
+            result.textContent = message; 
             compWinLog.textContent = compWins;
             userWinLog.textContent = userWins;
+            tiecountlog.textContent = ties;
         }
     </script>
 </body>
