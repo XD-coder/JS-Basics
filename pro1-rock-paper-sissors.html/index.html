@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rpsg</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .title h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .guide {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .gameBtn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            cursor: pointer;
+        }
+
+        .gameBtn:hover {
+            background-color: #45a049;
+        }
+
+        .BtnReset {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f44336; /* Red */
+            color: white;
+            cursor: pointer;
+        }
+
+        .BtnReset:hover {
+            background-color: #d32f2f;
+        }
+
+        .resultMsg {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+            white-space: pre-line; /* To preserve line breaks */
+        }
+    </style>
+</head>
+<body>
+    <div class="title"><h1>Rock Paper Scissors Game !!!</h1></div>
+    <div class="guide">Press a button to choose a hand</div>
+    <div>
+        <button class="gameBtn" onclick="whoWon('Rock');">Rock</button>
+        <button class="gameBtn" onclick="whoWon('Paper');">Paper</button>
+        <button class="gameBtn" onclick="whoWon('Scissors');">Scissors</button>
+    </div>
+    <div>
+        <button class="BtnReset" onclick="location.reload()">Reset</button></div>
+        <p class="resultMsg"></p> 
+    <div>
+        <p1>User wins: <p class="userWins"></p></p1>
+        <p1>Comp wins: <p class="compWins"></p></p1>
+    </div>
+    <script>
+        const result = document.querySelector('.resultMsg'); // Use querySelector
+        const userWinLog = document.querySelector('.userWins');
+        const compWinLog = document.querySelector('.userWins');
+        let userWins= 0;
+        let compWins= 0;
+        function genCompInput(){
+            console.log("computer input generated");
+            const input = Math.floor(Math.random() * 3); // Use Math.floor for integers 0, 1, 2
+            if (input === 0){ 
+                return "Rock";
+            } else if (input === 1){
+                return "Paper";
+            } else { // Simplified condition
+                return "Scissors"; // Corrected spelling 
+            }
+        }
+
+        function whoWon(userIn) {
+            console.log("whoWon function initiated");
+            let compIn = genCompInput();
+            let message = "Computer chose " + compIn + " \n"; // Create the message
+
+            if (compIn === userIn){
+                message += "It's a tie!"; 
+            } else if (compIn =="Rock" && userIn =="Paper"){
+                message += "User Wins";
+                userWins +=1;
+            } else if (compIn ==="Rock" && userIn ==="Scissors"){
+                message += "Computer Wins";
+                compWins +=1;
+            } else if (compIn ==="Paper" && userIn ==="Rock"){
+                message += "Computer Wins";
+                compWins +=1;
+            } else if (compIn ==="Scissors" && userIn ==="Rock"){
+                message += "User Wins";
+                userWins +=1;
+            } else if (compIn ==="Paper" && userIn ==="Scissors"){
+                message += "User Wins";
+                userWins +=1;
+            } else if (compIn ==="Scissors" && userIn ==="Paper"){
+                message += "Computer Wins";
+                compWins +=1;
+            }
+
+            result.textContent = message; // Update the text content
+            compWinLog.textContent = compWins;
+            userWinLog.textContent = userWins;
+        }
+    </script>
+</body>
+</html>

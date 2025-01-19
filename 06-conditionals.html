@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>rock paper sissors</title>
+        <style>
+            button{
+                width: 200px;
+                height:50px;
+            }
+        </style>
+    </head>
+    <button onclick="
+    userInput=0
+    if (userInput == compInput){
+        // here we will be using alert instead of console.log
+                alert('you both showed the same hand');
+    }else if(userInput==0 && compInput == 1){
+                alert('you  : rock\ncomp : paper\nComputer WINS');
+    }else if(userInput==0 && compInput == 2){
+                alert('you  : rock\ncomp : sissors\nYou WIN');
+    }
+    compInput = Math.floor(Math.random() * 3);
+    ">rock</button>
+    <button onclick="
+    userInput=1
+    if (userInput == compInput){
+                alert('you both showed the same hand');
+    }else if(userInput==1 && compInput == 0){
+                alert('you  : paper\ncomp : rock\nYou WIN');
+    }else if(userInput==1 && compInput == 2){
+                alert('you  : paper\ncomp : sissors\nComputer WINs');
+            }
+    compInput = Math.floor(Math.random() * 3);
+    ">paper</button>
+    <button onclick="
+    userInput=2
+    if (userInput == compInput){
+                alert('you both showed the same hand');
+    }else if(userInput==2 && compInput == 1){
+                alert('you  : sissors\ncomp : paper\nYou WIN');
+    }else if(userInput==2 && compInput == 0){
+                alert('you  : sissors\ncomp : rock\nComputer WINS');
+            }
+    compInput = Math.floor(Math.random() * 3);
+    ">sissors</button>
+    
+    
+    <body>
+        <script> 
+            let userInput = 0;
+            let compInput = Math.floor(Math.random() * 3);
+            console.log(compInput);
+
+        </script>
+    </body>
+</html>
